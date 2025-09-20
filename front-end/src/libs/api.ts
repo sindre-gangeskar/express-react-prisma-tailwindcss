@@ -26,9 +26,18 @@ export async function getProduct(id: number) {
     const { data } = await response.json();
     return data.product as ProductProps;
   } catch (error) {
-    if (error && typeof error === "object" && "message" in error) {
-      return { status: "error", message: error.message };
-    }
+    console.error(error);
     throw error;
   }
+}
+
+export async function getRandomProduct(): Promise<ProductProps> {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/random`,
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+    });
+  if (!response.ok) throw new Error('Failed to retrieve product information');
+  const { data } = await response.json();
+  return data.product as ProductProps;
 }

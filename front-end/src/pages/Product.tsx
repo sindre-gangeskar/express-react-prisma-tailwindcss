@@ -7,11 +7,11 @@ import { BsArrowLeftCircleFill } from "react-icons/bs";
 export default function Product() {
 	const params = useParams();
 	const navigate = useNavigate();
-	const id = params.id ? +params.id : undefined;
+	const id = params.id ? +params.id : null;
 	const { data, isLoading } = useQuery({
 		queryKey: [`product/${id}`],
 		queryFn: async () => {
-			if (!id) return undefined;
+			if (!id) return null;
 			return (await getProduct(id)) as ProductProps;
 		},
 	});
@@ -22,11 +22,12 @@ export default function Product() {
 		return (
 			<div id="product">
 				<Button
-					className="bg-slate-900 cursor-pointer inline-flex items-center font-bold gap-2 text-xl mb-12"
+					color="primary"
+					className="font-bold gap-2 mb-12"
 					onClick={() => {
 						navigate("/products");
 					}}>
-					<BsArrowLeftCircleFill /> Go back
+					<BsArrowLeftCircleFill /> Go Back
 				</Button>
 				<p className="font-bold text-3xl capitalize">{data.category.name}</p>
 				<p className="text-2xl">{data.name}</p>

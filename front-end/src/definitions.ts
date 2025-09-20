@@ -17,6 +17,8 @@ export interface ButtonProps {
   type?: HTMLButtonElement[ 'type' ];
   loading?: boolean
   onClick?: React.MouseEventHandler;
+  color?: ColorProps;
+  disabled?: boolean
 }
 
 export interface ProductProps {
@@ -32,3 +34,5 @@ export interface CategoryProps {
   id?: number,
   name: string
 }
+
+export type ColorProps = "primary" | "secondary" | "success" | "danger" | "warning" | "neutral"

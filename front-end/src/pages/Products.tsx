@@ -10,11 +10,10 @@ export default function Products() {
 	useGSAP(() => {
 		if (data && data.length > 0) {
 			const tl = gsap.timeline();
-			tl.set("#product", { opacity: 0, y: 25, filter: "blur(16px)" });
-			tl.to("#product", { opacity: 1, y: 0, ease: "power4.out", filter: "blur(0px)", duration: 0.9, stagger: 0.125 });
+			tl.set("#product", { opacity: 0, filter: "blur(16px)" });
+			tl.to("#product", { opacity: 1, ease: "power4.out", filter: "blur(0px)", duration: 0.9 });
 		}
 	}, [data]);
-
 
 	return (
 		<section id="products">
@@ -23,7 +22,7 @@ export default function Products() {
 				<p className="text-center">View all of our products in one place</p>
 			</div>
 			<div className="products-wrapper w-full p-0 grid mx-auto gap-5 justify-center grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]">
-				{!data || data.length === 0 && <p>No products available</p>}
+				{!data || (data.length === 0 && <p>No products available</p>)}
 				{data && data.length > 0 && !isLoading
 					? data.map(product => (
 							<Link key={product.id} className="hover:scale-105 transition-all hover:bg-neutral-200 ease-out duration-200" to={`/products/${product.id}`}>

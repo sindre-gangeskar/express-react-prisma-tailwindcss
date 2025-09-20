@@ -11,6 +11,20 @@ class ProductService {
     }
   }
 
+  static async getRandom() {
+    try {
+      return await prisma.$transaction(async tx => {
+        const count = await tx.product.count();
+        const skip = Math.floor(Math.random() * count)
+        const [ product ] = await tx.product.findMany({ take: 1, skip: skip, orderBy: { id: 'asc' }, include: {category: true} });
+        return product
+      })
+    } catch (error) {
+      console.error(error);
+      createAndThrowError(500, 'error', 'An internal server error has occurred while trying to get random product');
+    }
+  }
+
   static async getById(id) {
     try {
       const product = await prisma.product.findUnique({ where: { id: +id }, include: { category: true } });

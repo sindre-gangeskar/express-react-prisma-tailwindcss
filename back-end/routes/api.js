@@ -21,6 +21,11 @@ router.get('/products', asyncHandler(async (req, res, next) => {
   return res.status(200).jsend.success({ statusCode: 200, message: 'Successfully retrieved products', products: products });
 }))
 
+router.get('/products/random', asyncHandler(async (req, res, next) => {
+  const product = await ProductService.getRandom();
+  return res.status(200).jsend.success({ statusCode: 200, message: 'Successfully retrieved random product', product: product });
+}))
+
 router.get('/products/:id', asyncHandler(async (req, res, next) => {
   const product = await ProductService.getById(req.params.id);
   return res.status(200).jsend.success({ statusCode: 200, message: 'Successfully retrieved product', product: product });

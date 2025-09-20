@@ -20,3 +20,13 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+button {
+  cursor: pointer;
+}
+
+@layer components {
+  .btn {
+    @apply transition-all min-w-[80px] rounded-md p-3 text-white inline-flex items-center ease-out duration-200
+  }
+}
