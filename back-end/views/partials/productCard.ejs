@@ -1,0 +1,9 @@
+<div class="card p-3 rounded rounded-3 bg-white text-white shadow shadow-lg" style="height: 300px; min-height: 120px;">
+  <p class="card-title text-black fw-bold w-100 overflow-hidden text-center text-truncate"><%= product.name %></p>
+  <div class="card-body w-100 d-flex justify-content-center mx-auto h-auto align-items-center">
+    <img class="img-fluid object-fit-contain" style="height: 120px; width: 120px; aspect-ratio: 1;" src="<%= product.img_url %>" alt="">
+  </div>
+  <div class="card-footer w-100 mx-auto justify-content-center d-flex">
+    <a class="btn btn-warning btn-sm fw-bold" href="/products/<%= product.id %>">View Product</a>
+  </div>
+</div>

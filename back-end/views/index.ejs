@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <%- include('./partials/bootstrap.ejs') %>
+</head>
+
+<body>
+  <%- include('./partials/navbar.ejs') %>
+  <div class="wrapper container-md">
+    <div style="max-width: 500px;" class="form-wrapper d-flex justify-content-center flex-column w-50 mx-auto h-100 position-fixed bg-dark text-white rounded rounded-3 p-5 my-0 top-0 start-50 translate-middle-x">
+      <p class="h1">Welcome</p>
+      <% if(!session.user){ %>
+      <p>You are not logged in</p>
+      <a href="/auth/login" class="btn btn-primary">Take me to the login page</a>
+      <% } else{ %>
+      <p>You are logged in as <%= session.user.username %></p>
+      <form method="post" action="/auth/logout">
+        <button class="btn btn-danger">Click here to log out</button>
+      </form>
+      <% } %>
+    </div>
+  </div>
+</body>
+
+</html>

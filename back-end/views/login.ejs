@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('./partials/bootstrap.ejs') %>
+  <title>Login</title>
+</head>
+
+<body>
+  <%- include('./partials/navbar.ejs') %>
+  <div class="wrapper mx-auto p-3 mx-auto d-flex flex-column justify-content-center gap-3" style="max-width: 600px;">
+    <header class="h2">Login</header>
+    <form class="d-flex row gap-0" method="post" action="/auth/login">
+      <label class="form-label" for="username">Username</label>
+      <input class="form-control" placeholder="Enter username" type="text" name="username" required>
+      <label class="form-label" for="password">Password</label>
+      <input class="form-control" placeholder="Enter password" type="password" name="password" required>
+      <button class="btn btn-primary w-auto mx-auto mt-2" type="submit">Log in</button>
+    </form>
+    <% if(state && state.message){ %>
+    <p class="fw-bold text-danger text-center"><%- state.message %></p>
+    <% } %>
+  </div>
+</body>
+
+</html>
