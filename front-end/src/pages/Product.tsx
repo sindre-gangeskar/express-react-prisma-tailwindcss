@@ -22,7 +22,7 @@ export default function Product() {
 		return (
 			<div id="product">
 				<Button
-					color="primary"
+					color="neutral"
 					className="font-bold gap-2 mb-12"
 					onClick={() => {
 						navigate("/products");

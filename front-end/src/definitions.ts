@@ -19,6 +19,7 @@ export interface ButtonProps {
   onClick?: React.MouseEventHandler;
   color?: ColorProps;
   disabled?: boolean
+  variant?: "solid" | "plain" | "outlined" | "soft"
 }
 
 export interface ProductProps {

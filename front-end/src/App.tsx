@@ -11,16 +11,16 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Background />
-			<Navbar />
-			<div className="max-w-4xl p-3 my-16 mx-auto">
-				<QueryClientProvider client={queryClient}>
+			<QueryClientProvider client={queryClient}>
+				<Navbar />
+				<div className="max-w-4xl p-3 my-16 mx-auto">
 					<Routes>
 						<Route index element={<Home />}></Route>
 						<Route path="/products" element={<Products />}></Route>
 						<Route path="/products/:id" element={<Product />}></Route>
 					</Routes>
-				</QueryClientProvider>
-			</div>
+				</div>
+			</QueryClientProvider>
 		</BrowserRouter>
 	);
 }

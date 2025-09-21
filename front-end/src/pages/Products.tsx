@@ -1,11 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "../libs/api";
 import ProductSkeleton from "../components/skeletons/ProductSkeleton";
 import { Link } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useSearchParams } from "react-router-dom";
+import useSearch from "../hooks/useSearch";
 export default function Products() {
-	const { data, isLoading } = useQuery({ queryKey: ["products"], queryFn: getProducts });
+	const [searchParams] = useSearchParams();
+	const searchTerm = searchParams.get("search");
+	const { data, isLoading } = useSearch(searchTerm ?? "");
 
 	useGSAP(() => {
 		if (data && data.length > 0) {
@@ -18,8 +20,8 @@ export default function Products() {
 	return (
 		<section id="products">
 			<div className="title-wrapper mb-26 text-black">
-				<p className="text-6xl text-center">Products Overview</p>
-				<p className="text-center">View all of our products in one place</p>
+				<p className="text-6xl text-center">Browse</p>
+				<p className="text-center">Browse all of our available products</p>
 			</div>
 			<div className="products-wrapper w-full p-0 grid mx-auto gap-5 justify-center grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]">
 				{!data || (data.length === 0 && <p>No products available</p>)}
