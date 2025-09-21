@@ -19,6 +19,18 @@ router.get('/products', asyncHandler(async (req, res, next) => {
   return res.status(200).jsend.success({ statusCode: 200, message: 'Successfully retrieved products', products: products });
 }))
 
+router.get('/products/search/:query', asyncHandler(async (req, res, next) => {
+  const search = req?.params?.query;
+  console.log('REACHED SEARCH');
+  let products;
+  if (!search || search === "")
+    products = await ProductService.getAll();
+
+  products = await ProductService.search(search ?? "");
+  const foundProducts = !!products.length > 0;
+  return res.status(200).jsend.success({ statusCode: 200, message: foundProducts ? 'Successfully retrieved products' : 'No products found with search query', products: products });
+}))
+
 router.get('/products/random', asyncHandler(async (req, res, next) => {
   const product = await ProductService.getRandom();
   return res.status(200).jsend.success({ statusCode: 200, message: 'Successfully retrieved random product', product: product });
@@ -29,12 +41,6 @@ router.get('/products/:id', asyncHandler(async (req, res, next) => {
   return res.status(200).jsend.success({ statusCode: 200, message: 'Successfully retrieved product', product: product });
 }))
 
-router.post('/products/search', asyncHandler(async (req, res, next) => {
-  const { search } = req.body;
-  const products = await ProductService.search(search);
-  const foundProducts = !!products.length > 0;
-  const status = foundProducts ? 200 : 404
-  return res.status(status).jsend.success({ statusCode: status, message: foundProducts ? 'Successfully retrieved products' : 'No products found with search query', products: products });
-}))
+
 
 module.exports = router;

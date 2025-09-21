@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { searchProduct } from "../libs/api";
+import { getProducts, searchProduct } from "../libs/api";
 export default function useSearch(searchTerm: string) {
-	return useQuery({ queryKey: ["products", searchTerm], queryFn: () => searchProduct(searchTerm) });
+	return useQuery({ queryKey: ["products", searchTerm], queryFn: () =>  searchTerm ? searchProduct(searchTerm) : getProducts() });
 }

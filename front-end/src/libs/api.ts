@@ -45,10 +45,9 @@ export async function getRandomProduct(): Promise<ProductProps> {
 
 export async function searchProduct(search: string): Promise<ProductProps[]> {
   try {
-    const response = await fetch(`${url}/api/products/search`, {
+    const response = await fetch(`${url}/api/products/search/${search}`, {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      method: 'POST',
-      body: JSON.stringify({ search: search }, null, 2)
+      method: 'GET',
     })
 
     if (response.ok) {

@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import type { LocationProps } from "../../definitions";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { searchProduct } from "../../libs/api";
+import { getProducts, searchProduct } from "../../libs/api";
 import { useQueryClient } from "@tanstack/react-query";
 import Button from "./Button";
 import { RxReset } from "react-icons/rx";
@@ -28,7 +28,7 @@ export default function Navbar() {
 
 	const resetSearch = () => {
 		setSearchTerm("");
-		queryClient.prefetchQuery({ queryKey: ["products", searchTerm], queryFn: () => searchProduct("") });
+		queryClient.prefetchQuery({ queryKey: ["products", searchTerm], queryFn: () => getProducts() });
 		navigate("/products");
 	};
 
