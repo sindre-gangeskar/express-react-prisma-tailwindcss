@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('./partials/bootstrap.ejs') %>
+  <title>Products</title>
+</head>
+
+<body>
+  <%-include('./partials/navbar.ejs') %>
+  <div class="wrapper container-md">
+    <p class="title h1">Products Overview</p>
+    <div class="products-stack row row-cols-auto row-cols-1 row-cols-sm-2 row-cols-md-3 container container-fluid gap-3 justify-content-center">
+      <% if(products.length == 0){ %>
+      <p>No products available</p>
+      <% } %>
+      <% if(products.length > 0){ %>
+      <% products.forEach(product => { %>
+      <%-include('./partials/productCard.ejs', {product: product}) %>
+      <% }) %>
+      <% } %>
+    </div>
+    <div class="pagination-wrapper mx-auto d-flex col w-auto gap-3 justify-content-center p-3 my-3">
+
+      <% if(hasPreviousPage) { %>
+      <a class="btn btn-primary" href="/products/?page=1">First Page</a>
+      <a class="btn btn-primary" href="/products/?page=<%= currentPage - 1 %>"><%= (currentPage - 1) %></a>
+      <% } %>
+
+      <button class="btn btn-light disabled"><%= currentPage %></button>
+      
+      <% if(hasNextPage){ %>
+      <a class="btn btn-primary" href="/products/?page=<%= nextPage %>"><%= nextPage %></a>
+      <a class="btn btn-primary" href="/products/?page=<%= totalPages %>">Last Page</a>
+      <% } %>
+    </div>
+  </div>
+</body>
+
+</html>
